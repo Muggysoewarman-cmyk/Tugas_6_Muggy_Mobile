@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'cartpage.dart';
 
 class DetailPage extends StatelessWidget {
   final String nama;
@@ -59,6 +60,25 @@ class DetailPage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        cartItems.value = [
+                          ...cartItems.value,
+                          {'nama': nama, 'lokasi': lokasi, 'gambar': gambar},
+                        ];
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('$nama ditambahkan ke keranjang'),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.add_shopping_cart),
+                      label: const Text('Tambah ke Keranjang'),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'detailpage.dart';
+import 'cartpage.dart';
 
 class HomePage extends StatelessWidget {
   final List<Map<String, String>> travelData;
@@ -13,6 +14,23 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Katalog Wisata'),
+          actions: [
+            ValueListenableBuilder<List<Map<String, String>>>(
+              valueListenable: cartItems,
+              builder: (context, items, _) => IconButton(
+                tooltip: 'Keranjang',
+                icon: Badge(
+                  isLabelVisible: items.isNotEmpty,
+                  label: Text('${items.length}'),
+                  child: const Icon(Icons.shopping_cart),
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const CartPage()),
+                ),
+              ),
+            ),
+          ],
           bottom: const TabBar(
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white70,
